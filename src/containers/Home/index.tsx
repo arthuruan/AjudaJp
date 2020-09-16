@@ -1,12 +1,16 @@
 import React from 'react';
 
 import Navbar from '../../components/Navbar';
+import Apresentation from '../../components/Apresentation';
+import SearchLocation from '../../components/SearchLocation';
 
 const Home: React.FC = () => {
   return (
-    <div>
+    <>
       <Navbar />
-    </div>
+      <Apresentation />
+      <SearchLocation />
+    </>
   );
 }
 

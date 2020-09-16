@@ -51,7 +51,7 @@ html {
 }
 
 body {
-	font-family: "Roboto", sans-serif !important;
+	font-family: "Nunito", sans-serif !important;
 	font-size: 0.9375rem;
 	top: 0px;
 	left: 0px;
@@ -68,21 +68,30 @@ body {
     background-color: $blue_default;
     color: #fff;
     border-color: $blue_default;
-  }
-  .primary-button:hover {
-    background-color: $blue_default__hover;
-    border-color: $blue_default__hover;
+    &:hover {
+      background-color: $blue_default__hover;
+      border-color: $blue_default__hover;
+    }
   }
   
   .secondary-button {
     background-color: #fff;
     color: $blue_default;
     border-color: $blue_default;
+    &:hover {
+      background-color: #fff;
+      color: $blue_default;
+      border-color: $blue_default;
+    }
   }
-  .secondary-button:hover {
-    background-color: #fff;
-    color: $blue_default;
-    border-color: $blue_default;
+
+  &::-webkit-scrollbar {
+    width: 0.25rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    // border-radius: 20px;
+    background: $blue_default;
   }
 
 	@media only screen and (min-width: 1000px) {}

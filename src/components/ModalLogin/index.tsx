@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 interface MyProps {
-  show: any;
+  show: boolean;
   onHide: any;
 }
 
@@ -21,20 +21,20 @@ const ModalLogin = ({ show, onHide }: MyProps) => {
       centered
     >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
+        <h4>
           Entrar na AutonoDev
-        </Modal.Title>
+        </h4>
       </Modal.Header>
       <Modal.Body>
         <Form>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" />
+            <Form.Control type="email" placeholder="Email" />
           </Form.Group>
 
           <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
+            <Form.Label>Senha</Form.Label>
+            <Form.Control type="password" placeholder="Senha" />
           </Form.Group>
         </Form>
       </Modal.Body>
@@ -48,6 +48,7 @@ const ModalLogin = ({ show, onHide }: MyProps) => {
         <Button
           onClick={props.onHide}
           className="secondary-button"
+          variant="outline-light"
         >
           Fechar
         </Button>

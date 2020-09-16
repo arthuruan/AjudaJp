@@ -1,9 +1,10 @@
 @import '../../mixin.scss';
 
-.nav {
+.navbar-nav {
   padding: 10px !important;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
 
   .container-nav {
     display: flex;
@@ -15,9 +16,11 @@
       transition: 0.3s;
       font-size: 1.1rem;
       letter-spacing: 1.5px;
+      display: flex;
+      align-items: center;
     }
     a:hover {
-      color: $blue_default;
+      color: $blue_default !important;
     }
   }
 }
@@ -42,4 +45,8 @@
       font-weight: 400;
     }
   }
+}
+
+.navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
+  color: $blue_default !important;
 }
