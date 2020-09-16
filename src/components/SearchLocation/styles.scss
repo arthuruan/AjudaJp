@@ -41,9 +41,6 @@
     margin-top: 30px;
     padding: 0 20px 20px;
 
-    select {
-      width: 400px;
-    }
   }
 
   .wrapper-neighborhood {
@@ -87,6 +84,12 @@
         font-weight: 500;
         letter-spacing: 1px;
         font-size: 2rem;
+      }
+      .container-neighborhoods {
+        display: flex;
+        justify-content: center;
+        height: fit-content;
+        width: 300px;
       }
     }
   }

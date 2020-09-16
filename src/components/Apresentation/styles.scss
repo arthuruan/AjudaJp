@@ -6,17 +6,18 @@
   padding: 20px 30px;
 
   .container-left {
-    width: 55%;
+    width: 50%;
     display: flex;
     justify-content: center;
+    align-items: center;
     img {
-      width: 650px;
-      height: 650px;
+      width: 70%;
+      height: 70%;
       object-fit: contain;
     }
   }
   .container-right {
-    width: 45%;
+    width: 50%;
     display: flex;
     align-items: center;
     justify-content: center;

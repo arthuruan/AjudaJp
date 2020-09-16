@@ -23,7 +23,7 @@ const Navbar: React.FC = () => {
           <div className="container-nav left" >
             <div className="container-logo" >
               <img src={Logo} alt="logo-AutonoDev" />
-              <h3>utono<span>Dev</span></h3>
+              <h3>juda<span>JP</span></h3>
             </div>
             <Nav.Item>
               <Nav.Link href="/">Home</Nav.Link>

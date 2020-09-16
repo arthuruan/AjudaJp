@@ -1,16 +1,21 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
-
 import './styles.scss';
+//images
 import map from '../../images/map.svg';
 import waitingSearch from '../../images/waitingSearch.svg';
-
+//bootstrap
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Popover from 'react-bootstrap/Popover';
+//icons
 import { Search } from '@material-ui/icons';
-
-import data from '../../data/neighborhoods.json';
-
+//data
+import dataJSON from '../../data/neighborhoods.json';
+//leaflet
 import { Map, TileLayer, Marker } from 'react-leaflet';
+import { Select, MenuItem, FormControl } from '@material-ui/core';
 
 interface Neighborhoods {
   zone: number;
@@ -25,32 +30,29 @@ interface Neighborhood {
 
 const SearchLocation: React.FC = () => {
 
-  const [initialPosition, setInitialPosition] = useState<[number, number]>([0, 0]);
-  const [selectedPosition, setSelectedPosition] = useState<any>([]);
-  const [neighborhoods, setNeighborhoods] = useState<Neighborhoods[]>(data.neighborhoods);
-  const [search, setSearch] = useState(0);
+  const data = dataJSON.neighborhoods;
+  //state
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [initialPosition, setInitialPosition] = useState<[number, number]>([-7.1402162, -34.8881228]); //Coordenadas de João Pessoa
+  const [neighborhoods, setNeighborhoods] = useState<Neighborhood[]>([]);
+  const [zoneSelected, setZoneSelected] = useState(0);
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(position => {
-      const { latitude, longitude } = position.coords;
-
-      setInitialPosition([latitude, longitude]);
-    });
-  }, []);
-
+  //setar array de bairros de acordo com a zona selecionada
   const searchZone = () => {
-    neighborhoods.map((item: Neighborhoods) => {
-      if (item.zone === Number(search)) {
-        setSelectedPosition(item.neighborhood);
-      } else if (0 === Number(search)) {
-        setSelectedPosition([]);
+    // eslint-disable-next-line array-callback-return
+    data.map((item: Neighborhoods) => {
+      if (item.zone === zoneSelected) {
+        setNeighborhoods(item.neighborhood);
+      } else if (0 === zoneSelected) {
+        setNeighborhoods([]);
       }
     })
   }
-
+  //execulta a função a cima toda vez que for selecionada outra zona
   useEffect(() => {
     searchZone();
-  }, [search]);
+  }, [zoneSelected]);
+
 
   return (
     <div className="container-searchLocation" >
@@ -62,20 +64,64 @@ const SearchLocation: React.FC = () => {
       <Form
         className="form-search"
       >
-        <Form.Control
-          as="select" onChange={(e: any) => setSearch(e.target.value)} >
+        {/* <Form.Control
+          as="select"
+          onChange={(e: any) => setZoneSelected(Number(e.target.value))}
+        >
           <option value={0} > Selecione uma zona </option>
           {
-            neighborhoods.map((neighborhood: Neighborhoods) => (
+            data.map((item: Neighborhoods) => (
               <option
-                key={neighborhood.zone}
-                value={neighborhood.zone}
+                key={item.zone}
+                value={item.zone}
               >
-                {`Zona ${neighborhood.zone}`}
+                {`Zona ${item.zone}`}
               </option>
             ))
           }
-        </Form.Control>
+        </Form.Control> */}
+
+        <FormControl variant="outlined" size="small" style={{ width: '400px' }} >
+          <Select
+            labelId="demo-simple-select-outlined-label"
+            id="demo-simple-select-outlined"
+            onChange={(e: any) => setZoneSelected(Number(e.target.value))}
+          >
+            <MenuItem value={0} disabled>
+              Selecione uma zona
+            </MenuItem>
+            {
+              data.map((item: Neighborhoods) => (
+                <MenuItem
+                  key={item.zone}
+                  value={item.zone}
+                  style={{ paddingRight: 0 }}
+                >
+                  <OverlayTrigger
+                    trigger="hover"
+                    placement="right-start"
+                    overlay={
+                      <Popover id="popover-basic">
+                        {
+                          item.neighborhood.map((text: Neighborhood) => (
+                            <Popover.Content>
+                              {text.name}
+                            </Popover.Content>
+                          ))
+                        }
+                      </Popover>
+                    }
+                  >
+                    <div style={{ width: '100%', fontFamily: '"Nunito", sans-serif' }} >
+                      {`Zona ${item.zone}`}
+                    </div>
+                  </OverlayTrigger>
+                </MenuItem>
+              ))
+            }
+          </Select>
+        </FormControl>
+
         <Button className="primary-button" >
           <Search />
         </Button>
@@ -83,23 +129,32 @@ const SearchLocation: React.FC = () => {
 
       <div className="wrapper-neighborhood">
         <div className="container-map">
-          <Map center={initialPosition} zoom={11} >
+          <Map center={initialPosition} zoom={12} >
             <TileLayer
               attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            {selectedPosition.map((mark: Neighborhood) => (
-              <Marker position={mark.location} title={mark.name} />
-            ))
+            {
+              neighborhoods.map((mark: Neighborhood) => (
+                <Marker position={mark.location} title={mark.name} key={mark.id} />
+              ))
             }
           </Map>
         </div>
         <div className="container-info" >
           {/* esperando pela busca */}
-          <img src={waitingSearch} alt="waitingSearch" />
-          <span>Esperando busca pela zona.</span>
+          {/* <img src={waitingSearch} alt="waitingSearch" />
+          <span>Esperando busca pela zona.</span> */}
           {/* resultado da busca */}
-
+          <div className="container-neighborhoods" >
+            {!!neighborhoods.length &&
+              neighborhoods.map((neighborhood: Neighborhood) => (
+                <button>
+                  {neighborhood.name}
+                </button>
+              ))
+            }
+          </div>
         </div>
       </div>
 
