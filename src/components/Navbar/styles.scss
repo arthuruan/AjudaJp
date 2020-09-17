@@ -20,7 +20,7 @@
       align-items: center;
     }
     a:hover {
-      color: $blue_default !important;
+      color: $blue_font !important;
     }
   }
 }
@@ -48,5 +48,5 @@
 }
 
 .navbar-light .navbar-nav .active>.nav-link, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .show>.nav-link {
-  color: $blue_default !important;
+  color: $blue_font !important;
 }

@@ -2,17 +2,17 @@
 
 .wrapper-apresentation {
   display: flex;
-  height: 90vh;
+  height: 95vh;
   padding: 20px 30px;
 
   .container-left {
     width: 50%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    // align-items: center;
     img {
-      width: 70%;
-      height: 70%;
+      width: 80%;
+      height: 80%;
       object-fit: contain;
     }
   }
@@ -23,20 +23,35 @@
     justify-content: center;
 
     .info {
-      border-left: 1.5px solid $blue_default;
-      padding-left: 10px;
-      padding-right: 80px;
+      padding-left: 80px;
 
       h3 {
-        color: $blue_default;
-        font-weight: 600;
+        color: $blue_font;
+        font-weight: bold;
+        font-size: 2.8rem;
       }
       p {
-        margin-bottom: 0.5rem !important;
-        font-size: 1.3rem;
+        margin-bottom: 2rem !important;
+        font-size: 1.5rem;
         color: $gray_font;
         line-height: 1.8rem;
+      }
 
+      button {
+        background-color: $blue_default;
+        color: #fff;
+        border: 0;
+        padding: 12px 20px;
+        border-radius: 40px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: 0.5s;
+        outline: none;
+        box-shadow: 0 8px 16px 0 rgba(29, 100, 174, 0.25), 0 6px 20px -2px rgba(29, 100, 174, 0.19);
+
+        &:hover {
+          background-color: $blue_default__hover;
+        }
       }
     }
   }

@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react';
 import './styles.scss';
 //images
 import map from '../../images/map.svg';
-import waitingSearch from '../../images/waitingSearch.svg';
+import waitingSearch from '../../images/waitingSearch.jpg';
 //bootstrap
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import ButtonBootstrap from 'react-bootstrap/Button';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 //icons
@@ -15,7 +15,7 @@ import { Search } from '@material-ui/icons';
 import dataJSON from '../../data/neighborhoods.json';
 //leaflet
 import { Map, TileLayer, Marker } from 'react-leaflet';
-import { Select, MenuItem, FormControl } from '@material-ui/core';
+import { Select, MenuItem, FormControl, Button } from '@material-ui/core';
 
 interface Neighborhoods {
   zone: number;
@@ -53,7 +53,6 @@ const SearchLocation: React.FC = () => {
     searchZone();
   }, [zoneSelected]);
 
-
   return (
     <div className="container-searchLocation" >
       <div className="title-search" >
@@ -64,31 +63,15 @@ const SearchLocation: React.FC = () => {
       <Form
         className="form-search"
       >
-        {/* <Form.Control
-          as="select"
-          onChange={(e: any) => setZoneSelected(Number(e.target.value))}
-        >
-          <option value={0} > Selecione uma zona </option>
-          {
-            data.map((item: Neighborhoods) => (
-              <option
-                key={item.zone}
-                value={item.zone}
-              >
-                {`Zona ${item.zone}`}
-              </option>
-            ))
-          }
-        </Form.Control> */}
-
         <FormControl variant="outlined" size="small" style={{ width: '400px' }} >
           <Select
             labelId="demo-simple-select-outlined-label"
             id="demo-simple-select-outlined"
             onChange={(e: any) => setZoneSelected(Number(e.target.value))}
+            value={zoneSelected}
           >
-            <MenuItem value={0} disabled>
-              Selecione uma zona
+            <MenuItem value={0}>
+              <em>Selecione uma zona</em>
             </MenuItem>
             {
               data.map((item: Neighborhoods) => (
@@ -104,7 +87,7 @@ const SearchLocation: React.FC = () => {
                       <Popover id="popover-basic">
                         {
                           item.neighborhood.map((text: Neighborhood) => (
-                            <Popover.Content>
+                            <Popover.Content key={text.id} >
                               {text.name}
                             </Popover.Content>
                           ))
@@ -122,9 +105,9 @@ const SearchLocation: React.FC = () => {
           </Select>
         </FormControl>
 
-        <Button className="primary-button" >
+        <ButtonBootstrap className="primary-button" >
           <Search />
-        </Button>
+        </ButtonBootstrap>
       </Form>
 
       <div className="wrapper-neighborhood">
@@ -142,19 +125,31 @@ const SearchLocation: React.FC = () => {
           </Map>
         </div>
         <div className="container-info" >
-          {/* esperando pela busca */}
-          {/* <img src={waitingSearch} alt="waitingSearch" />
-          <span>Esperando busca pela zona.</span> */}
-          {/* resultado da busca */}
-          <div className="container-neighborhoods" >
-            {!!neighborhoods.length &&
-              neighborhoods.map((neighborhood: Neighborhood) => (
-                <button>
-                  {neighborhood.name}
-                </button>
-              ))
-            }
-          </div>
+          {!neighborhoods.length &&
+            <>
+              <img src={waitingSearch} alt="waitingSearch" />
+              <span>Esperando busca pela zona</span>
+            </>
+          }
+          {!!neighborhoods.length &&
+            <div className="container-choiceNeighborhood" >
+
+              <h4>Você selecionou a zona {zoneSelected}</h4>
+              <p>Escolha um bairro para enviar uma mensagem:</p>
+
+              <div className="container-neighborhoods">
+                {
+                  neighborhoods.map((neighborhood: Neighborhood) => (
+                    <div className="wrapper-button" key={neighborhood.id} >
+                      <ButtonBootstrap className="primary-button" >
+                        {neighborhood.name}
+                      </ButtonBootstrap>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+          }
         </div>
       </div>
 

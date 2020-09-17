@@ -26,10 +26,9 @@
       transform: rotate(10deg);
     }
     h4 {
-      color: $blue_default;
+      color: $blue_font;
       font-weight: bold;
-      letter-spacing: 1px;
-      font-size: 2rem;
+      font-size: 2.2rem;
       z-index: 2;
     }
   }
@@ -73,10 +72,10 @@
       border-left: 1.5px solid $blue_default;
 
       img {
-        width: 50%;
-        height: 50%;
+        width: 60%;
+        height: 80%;
         object-fit: contain;
-        margin-bottom: 20px;
+        // margin-bottom: 20px;
       }
 
       span {
@@ -85,12 +84,29 @@
         letter-spacing: 1px;
         font-size: 2rem;
       }
-      .container-neighborhoods {
+
+      .container-choiceNeighborhood {
+
         display: flex;
+        flex-direction: column;
+        align-items: center;
         justify-content: center;
-        height: fit-content;
-        width: 300px;
+        height: 100%;
+        width: 100%;
+
+        .container-neighborhoods {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          width: 100%;
+          // width: 50%;
+  
+          .wrapper-button {
+            padding: 15px;
+          }
+        }
       }
+
     }
   }
 
