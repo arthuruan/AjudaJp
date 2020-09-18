@@ -22,7 +22,7 @@ const Apresentation: React.FC = () => {
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Error consequuntur officiis ipsa a odio, in voluptate eligendi, enim molestiae quibusdam consectetur aspernatur! Quis magnam beatae ea delectus enim dolorem facilis.
           </p>
 
-          <button className="button-start" onClick={scrollToNextPage} >
+          <button className="primary-button" onClick={scrollToNextPage} >
             Quero ajudar
             <ArrowForward />
           </button>

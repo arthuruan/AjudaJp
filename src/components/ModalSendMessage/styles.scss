@@ -1,0 +1,50 @@
+@import '../../mixin.scss';
+
+.modal-header {
+  h5 {
+    color: $blue_font;
+
+    span {
+      font-weight: 600;
+
+    }
+  }
+}
+
+.container-noLogged {
+
+  padding-bottom: 10px;
+
+  img {
+    width: 50%;
+    height: 50%;
+    object-fit: contain;
+  }
+
+  .modal-header {
+    border-bottom: 0 !important;
+  }
+
+  .modal-footer {
+    border-top: 0 !important;
+    padding: .75rem 1.8rem;
+  }
+
+  .content-img {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 0 1.5rem;
+
+    h4 {
+      color: $blue_font;
+      font-weight: bold;
+    }
+
+    p {
+      text-align: center;
+      color: $gray_font;
+    }
+
+  }
+}

@@ -9,9 +9,26 @@ import Logo from '../../images/logo.png';
 //component
 import ModalLogin from '../ModalLogin';
 
+import { useSelector, RootStateOrAny, useDispatch } from 'react-redux';
+import { removeUser } from '../../store/ducks/user/actions';
+
+interface User {
+  id: string;
+  token: string;
+  name: string;
+  email: string;
+  password: string;
+}
+
 const Navbar: React.FC = () => {
 
+  const user: User = useSelector((state: RootStateOrAny) => state.user.user);
+  const dispatch = useDispatch();
   const [modalShow, setModalShow] = useState(false);
+
+  const signOut = () => {
+    dispatch(removeUser());
+  }
 
   return (
     <>
@@ -35,10 +52,14 @@ const Navbar: React.FC = () => {
           <div className="container-nav right" >
             <Nav.Item >
               <Nav.Link
-                onClick={() => setModalShow(true)}
+                onClick={() => { user.name === '' ? setModalShow(true) : signOut() }}
               >
                 <Person style={{ marginRight: 10 }} />
-                Entrar
+                {user.token !== '' ?
+                  user.name
+                  :
+                  "Entrar"
+                }
               </Nav.Link>
             </Nav.Item>
           </div>

@@ -67,21 +67,47 @@ body {
   .primary-button {
     background-color: $blue_default;
     color: #fff;
-    border-color: $blue_default;
+    border: 0;
+    padding: 12px 20px;
+    border-radius: 40px;
+    font-weight: 600;
+    transition: 0.5s;
+    outline: none !important;
+    box-shadow: 0 8px 16px 0 rgba(29, 100, 174, 0.25), 0 6px 20px -2px rgba(29, 100, 174, 0.19);
+
     &:hover {
       background-color: $blue_default__hover;
-      border-color: $blue_default__hover;
+    }
+
+    &:active {
+      background-color: $blue_default !important;
+      box-shadow: 0 8px 16px 0 rgba(29, 100, 174, 0.25), 0 6px 20px -2px rgba(29, 100, 174, 0.19) !important;
     }
   }
   
   .secondary-button {
     background-color: #fff;
     color: $blue_default;
-    border-color: $blue_default;
+    border: 1px solid $blue_default;
+    padding: 12px 20px;
+    border-radius: 40px;
+    font-weight: 600;
+    transition: 0.5s;
+    outline: none !important;
+    box-shadow: 0 8px 16px 0 rgba(29, 100, 174, 0.25), 0 6px 20px -2px rgba(29, 100, 174, 0.19);
+
+
     &:hover {
-      background-color: #fff;
+      background-color: rgb(203, 215, 255);
       color: $blue_default;
       border-color: $blue_default;
+    }
+
+    &:active {
+      background-color: rgb(203, 215, 255) !important;
+      color: $blue_default !important;
+      border-color: $blue_default !important;
+      box-shadow: 0 8px 16px 0 rgba(29, 100, 174, 0.25), 0 6px 20px -2px rgba(29, 100, 174, 0.19) !important;
     }
   }
 

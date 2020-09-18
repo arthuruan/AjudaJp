@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './styles.scss';
-
 //bootstrap
 import Form from 'react-bootstrap/Form';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
@@ -12,7 +11,10 @@ import { Search, ChevronLeft, ChevronRight } from '@material-ui/icons';
 import dataJSON from '../../data/neighborhoods.json';
 //leaflet
 import { Map, TileLayer, Marker } from 'react-leaflet';
-import { Select, MenuItem, FormControl, Divider } from '@material-ui/core';
+import { Select, MenuItem, FormControl, Divider, Switch } from '@material-ui/core';
+//component
+import ModalSendMessage from '../ModalSendMessage';
+import ModalLogin from '../ModalLogin';
 
 interface Neighborhoods {
   zone: number;
@@ -34,6 +36,10 @@ const PageMap: React.FC = () => {
   const [neighborhoods, setNeighborhoods] = useState<Neighborhood[]>([]);
   const [zoneSelected, setZoneSelected] = useState(0);
   const [isShowContent, setIsShowContent] = useState(true);
+  const [isZoom, setIsZoom] = useState(false);
+  const [showModalMessage, setShowModalMessage] = useState(false);
+  const [neighborhoodSelected, setNeighborhoodSelected] = useState('');
+  const [showModalLogin, setShowModalLogin] = useState(false);
 
   //setar array de bairros de acordo com a zona selecionada
   const searchZone = () => {
@@ -49,7 +55,14 @@ const PageMap: React.FC = () => {
   //executa a função a cima toda vez que for selecionada outra zona
   useEffect(() => {
     searchZone();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [zoneSelected]);
+
+  //abrir modal para envio de mensagem e setar o bairro selecionado
+  const openModalSendMessage = (neighborhood: string) => {
+    setShowModalMessage(true);
+    setNeighborhoodSelected(neighborhood);
+  }
 
   return (
     <div className="container-pagemap" >
@@ -102,16 +115,28 @@ const PageMap: React.FC = () => {
               </Select>
             </FormControl>
           </Form>
-
+          {/* Habilitar zoom do mapa */}
+          <div style={{ display: 'flex', alignItems: 'center', marginTop: 10 }} >
+            <Switch
+              checked={isZoom}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setIsZoom(e.target.checked)}
+              color="primary"
+            />
+            <span>{isZoom ? 'Desabilitar' : 'Habilitar'} zoom</span>
+          </div>
+          {/* listagem de bairros */}
           {!!neighborhoods.length &&
             <div className="container-choiceNeighborhood" >
-              <Divider style={{ margin: '20px 0', width: '100%' }} />
+              <Divider style={{ margin: '10px 0 20px 0', width: '100%' }} />
 
               <div className="container-neighborhoods">
                 {
                   neighborhoods.map((neighborhood: Neighborhood) => (
                     <div className="wrapper-button" key={neighborhood.id} >
-                      <Button className="primary-button" >
+                      <Button
+                        className="primary-button"
+                        onClick={() => openModalSendMessage(neighborhood.name)}
+                      >
                         {neighborhood.name}
                       </Button>
                     </div>
@@ -138,8 +163,9 @@ const PageMap: React.FC = () => {
         <Map
           center={initialPosition}
           zoom={12}
-          scrollWheelZoom={false}
+          scrollWheelZoom={isZoom}
           doubleClickZoom={false}
+          zoomControl={false}
         >
           <TileLayer
             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -152,6 +178,19 @@ const PageMap: React.FC = () => {
           }
         </Map>
       </div>
+      {/* Modal de mandar mensagem */}
+      <ModalSendMessage
+        show={showModalMessage}
+        onHide={() => setShowModalMessage(false)}
+        neighborhood={neighborhoodSelected}
+        openLogin={() => { setShowModalLogin(true); setShowModalMessage(false) }}
+      />
+      {/* Modal para logar */}
+      <ModalLogin
+        show={showModalLogin}
+        onHide={() => setShowModalLogin(false)}
+      />
+
     </div>
   );
 }
