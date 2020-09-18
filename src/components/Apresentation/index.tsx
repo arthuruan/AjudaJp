@@ -9,7 +9,7 @@ import illustration from '../../images/illustration.jpg';
 
 const Apresentation: React.FC = () => {
 
-  const scrollToNextPage = () => window.scrollTo(0, 1000);
+  const scrollToNextPage = () => document.querySelector('.container-pagemap')?.scrollIntoView({ behavior: 'smooth' });
 
   return (
     <div className="wrapper-apresentation" >

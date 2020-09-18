@@ -18,9 +18,12 @@
       letter-spacing: 1.5px;
       display: flex;
       align-items: center;
+      transition: transform .2s;
+      padding-right: 15px !important;
     }
     a:hover {
       color: $blue_font !important;
+      transform: scale(1.1);
     }
   }
 }
@@ -40,10 +43,13 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: #6D6D6D;
+    color: $blue_font;
     span {
       font-weight: 400;
     }
+  }
+  @media only screen and (max-width: 550px) {
+    display: none;
   }
 }
 

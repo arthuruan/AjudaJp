@@ -1,0 +1,104 @@
+@import '../../mixin.scss';
+
+.container-aboutMe {
+  height: 70vh;
+  display: flex;
+
+  .left {
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media only screen and (max-width: 550px) {
+      flex-direction: column;
+
+      img {
+        margin-right: 0 !important;
+      }
+    }
+
+    img {
+      width: 200px;
+      height: 200px;
+      object-fit: contain;
+      border-radius: 100%;
+      // border: 2px solid $blue_default;
+      transition: transform .2s;
+      margin-right: 30px;
+
+      @media only screen and (max-width: 800px) {
+        width: 150px;
+        height: 150px;
+      }
+
+      &:hover {
+        transform: scale(0.8);
+      }
+    }
+
+    .container-info {
+      h4 {
+        font-weight: bold;
+        color: $blue_font;
+      }
+
+      @media only screen and (max-width: 550px) {
+        text-align: center;
+        margin-top: 10px;
+      }
+      
+    }
+
+    .container-redes {
+      display: flex;
+
+      @media only screen and (max-width: 550px) {
+        justify-content: center;
+      }
+
+      a {
+        color: #a1a1a1;
+        margin-right: 25px;
+        transition: 0.7s;
+        align-self: center;
+
+        &:hover {
+          color: $blue_default__hover;
+        }
+        .MuiSvgIcon-root {
+          font-size: 35px !important;
+        }
+        .git {
+          font-size: 30px !important;
+        }
+      }
+
+    }
+
+  }
+
+  .right {
+    width: 40%;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 70%;
+      height: 70%;
+      object-fit: contain;
+    }
+    
+  }
+
+  @media only screen and (max-width: 800px) {
+    .right {
+      display: none;
+    }
+    .left {
+      width: 100%;
+    }
+  }
+}

@@ -36,7 +36,44 @@
         color: $gray_font;
         line-height: 1.8rem;
       }
+      @media only screen and (max-width: 1200px) {
+        h3 {
+          font-size: 2rem;
+        }
+        p {
+          font-size: 1rem;
+        }
+      }
+
+      @media only screen and (max-width: 400px) {
+        h3 {
+          font-size: 1.5rem;
+        }
+        p {
+          font-size: 1rem;
+        }
+      }
+      
 
     }
+  }
+  @media only screen and (max-width: 700px) {
+    .container-left {
+      display: none;
+    }
+    .container-right {
+      width: 100%;
+      .info {
+        padding-left: 0;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .wrapper-apresentation {
+    height: fit-content;
+
+    padding-bottom: 30px;
   }
 }

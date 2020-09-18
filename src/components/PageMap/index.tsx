@@ -39,7 +39,7 @@ const PageMap: React.FC = () => {
   const [isShowContent, setIsShowContent] = useState<boolean>(true);
   const [isZoom, setIsZoom] = useState<boolean>(false);
   const [showModalMessage, setShowModalMessage] = useState<boolean>(false);
-  const [neighborhoodSelected, setNeighborhoodSelected] = useState<string>('');
+  const [neighborhoodSelected, setNeighborhoodSelected] = useState<Neighborhood>({ name: '', id: 0, location: [0, 0] });
   const [showModalLogin, setShowModalLogin] = useState<boolean>(false);
   const [showModalSuccess, setShowModalSuccess] = useState<boolean>(false);
   const [message, setMessage] = useState<string>('');
@@ -62,7 +62,7 @@ const PageMap: React.FC = () => {
   }, [zoneSelected]);
 
   //abrir modal para envio de mensagem e setar o bairro selecionado
-  const openModalSendMessage = (neighborhood: string) => {
+  const openModalSendMessage = (neighborhood: Neighborhood) => {
     setShowModalMessage(true);
     setNeighborhoodSelected(neighborhood);
   }
@@ -138,7 +138,7 @@ const PageMap: React.FC = () => {
                     <div className="wrapper-button" key={neighborhood.id} >
                       <Button
                         className="primary-button"
-                        onClick={() => openModalSendMessage(neighborhood.name)}
+                        onClick={() => openModalSendMessage(neighborhood)}
                       >
                         {neighborhood.name}
                       </Button>
@@ -185,7 +185,7 @@ const PageMap: React.FC = () => {
       <ModalSendMessage
         show={showModalMessage}
         onHide={() => setShowModalMessage(false)}
-        neighborhood={neighborhoodSelected}
+        neighborhood={neighborhoodSelected.name as any}
         openLogin={() => setShowModalLogin(true)}
         sendMessage={(msg: string) => { setMessage(msg); setShowModalSuccess(true) }}
       />
@@ -197,8 +197,13 @@ const PageMap: React.FC = () => {
       {/* Modal de feedback ao enviar mensagem */}
       <ModalSuccess
         show={showModalSuccess}
-        onHide={() => setShowModalSuccess(false)}
-        message={message}
+        onHide={() => { setShowModalSuccess(false); setMessage('') }}
+        info={{
+          message,
+          zone: zoneSelected,
+          id: neighborhoodSelected.id,
+          neighborhoodName: neighborhoodSelected.name
+        }}
       />
 
     </div>

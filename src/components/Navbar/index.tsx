@@ -30,40 +30,60 @@ const Navbar: React.FC = () => {
     dispatch(removeUser());
   }
 
+  const goToPage = (page: string) => {
+    document.querySelector(page)?.scrollIntoView({ behavior: 'smooth' })
+  }
+
   return (
     <>
-      <Menu >
-        <Nav
-          activeKey="/"
-        // onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
-        >
-          <div className="container-nav left" >
-            <div className="container-logo" >
-              <img src={Logo} alt="logo-AutonoDev" />
-              <h3>juda<span>JP</span></h3>
+      <Menu id="navBar" collapseOnSelect expand="lg" >
+        <Menu.Toggle aria-controls="responsive-navbar-nav" />
+        <Menu.Collapse id="basic-Menu-nav">
+          <Nav
+            activeKey="/"
+          >
+            <div className="container-nav left" >
+              <div className="container-logo" >
+                <img src={Logo} alt="logo-AutonoDev" />
+                <h3>juda<span>JP</span></h3>
+              </div>
+              <Nav.Item>
+                <Nav.Link href="/">Início</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link
+                  eventKey="link-1"
+                  onClick={() => goToPage('.container-pagemap')}
+                >
+                  Mapa
+                </Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link
+                  eventKey="link-2"
+                  onClick={() => goToPage('.container-aboutMe')}
+                >
+                  Sobre
+                </Nav.Link>
+              </Nav.Item>
             </div>
-            <Nav.Item>
-              <Nav.Link href="/">Home</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="link-1">Sobre</Nav.Link>
-            </Nav.Item>
-          </div>
-          <div className="container-nav right" >
-            <Nav.Item >
-              <Nav.Link
-                onClick={() => { user.name === '' ? setModalShow(true) : signOut() }}
-              >
-                <Person style={{ marginRight: 10 }} />
-                {user.token !== '' ?
-                  user.name
-                  :
-                  "Entrar"
-                }
-              </Nav.Link>
-            </Nav.Item>
-          </div>
-        </Nav>
+            <div className="container-nav right" >
+              <Nav.Item >
+                <Nav.Link
+                  onClick={() => { user.name === '' ? setModalShow(true) : signOut() }}
+                >
+                  <Person style={{ marginRight: 10 }} />
+                  {user.token !== '' ?
+                    user.name
+                    :
+                    "Entrar"
+                  }
+                </Nav.Link>
+              </Nav.Item>
+            </div>
+          </Nav>
+
+        </Menu.Collapse>
       </Menu>
       <ModalLogin
         show={modalShow}

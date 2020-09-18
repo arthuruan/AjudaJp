@@ -11,7 +11,12 @@ import noUser from '../../images/noUser.png';
 interface MyProps {
   show: boolean;
   onHide: any;
-  message: string;
+  info: {
+    zone: number;
+    id: number;
+    neighborhoodName: string;
+    message: string;
+  };
 }
 
 interface User {
@@ -22,7 +27,7 @@ interface User {
   password: string;
 }
 
-const ModalSuccess = ({ show, onHide, message }: MyProps) => {
+const ModalSuccess = ({ show, onHide, info }: MyProps) => {
 
   const props = { show, onHide };
   const user: User = useSelector((state: RootStateOrAny) => state.user.user);
@@ -43,8 +48,13 @@ const ModalSuccess = ({ show, onHide, message }: MyProps) => {
           <img src={noUser} alt="avatar" />
           <h5> {user.name} </h5>
         </div>
+        <h5 className="title">Bairro selecionado</h5>
         <p>
-          {message}
+          Zona {info.zone}, {info.neighborhoodName}, id {info.id}
+        </p>
+        <h5 className="title" >Mensagem enviada</h5>
+        <p>
+          {info.message}
         </p>
       </Modal.Body>
       <Modal.Footer className="footer-modalSuccess" >

@@ -6,10 +6,12 @@
   }
   .modal-body {
     display: flex;
-    flex-direction: column ;
+    flex-direction: column;
+
     .data-user {
       display: flex;
       align-items: center;
+      margin-bottom: 15px;
 
       img {
         width: 50px;
@@ -25,13 +27,19 @@
     }
 
     p {
-      margin-top: 15px;
-      margin-bottom: 0 !important;
+      margin-bottom: 5px !important;
       color: $gray_font;
+    }
+
+    .title {
+      color: $blue_font;
+      font-weight: 600;
+      font-size: 1.1rem;
     }
 
   }
   .footer-modalSuccess {
+    padding-top: 0 !important;
     border-top: 0 !important;
     justify-content: flex-end !important;
   }

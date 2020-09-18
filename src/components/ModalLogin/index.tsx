@@ -12,7 +12,7 @@ import { environment } from '../../environment/environment';
 
 interface MyProps {
   show: boolean;
-  onHide: any;
+  onHide(): any;
 }
 
 const ModalLogin = ({ show, onHide }: MyProps) => {

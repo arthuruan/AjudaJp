@@ -11,9 +11,9 @@ import noLogged from '../../images/noLogged.svg';
 
 interface MyProps {
   show: boolean;
-  onHide: any;
+  onHide(): any;
   neighborhood: string;
-  openLogin: any;
+  openLogin(): any;
   sendMessage: any;
 }
 
@@ -33,8 +33,10 @@ const ModalSendMessage = ({ show, onHide, neighborhood, openLogin, sendMessage }
   const [message, setMessage] = useState<string>('');
 
   const submitMessage = () => {
-    props.onHide();
-    sendMessage(message);
+    if (message !== '') {
+      props.onHide();
+      sendMessage(message);
+    }
   }
 
   return (
@@ -51,7 +53,7 @@ const ModalSendMessage = ({ show, onHide, neighborhood, openLogin, sendMessage }
             </h5>
           </Modal.Header>
           <Modal.Body>
-            <Form>
+            <Form >
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>Mensagem</Form.Label>
                 <Form.Control

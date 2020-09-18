@@ -1,0 +1,56 @@
+@import '../../mixin.scss';
+
+.container-footerPage {
+  height: 30vh;
+  
+  .wave {
+    height: 100%;
+    background: linear-gradient(90deg, $blue_default, $blue_font);
+    position: relative;
+    z-index: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+
+    color: #fff;
+
+    img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 1;
+      width: 100%;
+    }
+
+    .container-fastLinks {
+      width: 100%;
+      height: 100%;
+      padding: 60px;
+
+      @media only screen and (max-width: 400px) {
+        padding: 10px;
+      }
+
+      .links {
+        display: flex;
+        
+
+        a {
+          color: #fff;
+          text-decoration: none;
+          margin: 5px 15px 0 5px;
+          cursor: pointer;
+          font-size: 1.1rem;
+          transition: transform .2s;
+
+          &:hover {
+            transform: scale(1.1);
+          }
+        }
+      }
+    }
+  }
+}
