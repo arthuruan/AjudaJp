@@ -1,0 +1,38 @@
+@import '../../mixin.scss';
+
+.modal-content {
+  .modal-header {
+    border-bottom: 0 !important;
+  }
+  .modal-body {
+    display: flex;
+    flex-direction: column ;
+    .data-user {
+      display: flex;
+      align-items: center;
+
+      img {
+        width: 50px;
+        height: 50px;
+        object-fit: contain;
+      }
+
+      h5 {
+        margin-left: 15px;
+        color: $blue_font;
+        font-weight: 600;
+      }
+    }
+
+    p {
+      margin-top: 15px;
+      margin-bottom: 0 !important;
+      color: $gray_font;
+    }
+
+  }
+  .footer-modalSuccess {
+    border-top: 0 !important;
+    justify-content: flex-end !important;
+  }
+}

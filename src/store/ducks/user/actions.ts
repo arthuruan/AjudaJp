@@ -1,4 +1,4 @@
-import { action } from 'typesafe-actions';
+// import { action } from 'typesafe-actions';
 import {
   UserTypes, UserState,
 } from './types';

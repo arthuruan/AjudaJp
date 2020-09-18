@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './styles.scss';
 
 import Modal from 'react-bootstrap/Modal';
@@ -14,6 +14,7 @@ interface MyProps {
   onHide: any;
   neighborhood: string;
   openLogin: any;
+  sendMessage: any;
 }
 
 interface User {
@@ -24,11 +25,17 @@ interface User {
   password: string;
 }
 
-const ModalSendMessage = ({ show, onHide, neighborhood, openLogin }: MyProps) => {
+const ModalSendMessage = ({ show, onHide, neighborhood, openLogin, sendMessage }: MyProps) => {
 
   const props = { show, onHide };
   const user: User = useSelector((state: RootStateOrAny) => state.user.user);
 
+  const [message, setMessage] = useState<string>('');
+
+  const submitMessage = () => {
+    props.onHide();
+    sendMessage(message);
+  }
 
   return (
     <Modal
@@ -49,16 +56,18 @@ const ModalSendMessage = ({ show, onHide, neighborhood, openLogin }: MyProps) =>
                 <Form.Label>Mensagem</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Comente sobre o bairro"
+                  placeholder="Digite aqui sobre o bairro"
                   as="textarea"
                   rows={3}
+                  value={message}
+                  onChange={(event: any) => setMessage(event.target.value)}
                 />
               </Form.Group>
             </Form>
           </Modal.Body>
           <Modal.Footer>
             <Button
-              onClick={props.onHide}
+              onClick={submitMessage}
               className="primary-button"
             >
               Enviar

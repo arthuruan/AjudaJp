@@ -15,6 +15,7 @@ import { Select, MenuItem, FormControl, Divider, Switch } from '@material-ui/cor
 //component
 import ModalSendMessage from '../ModalSendMessage';
 import ModalLogin from '../ModalLogin';
+import ModalSuccess from '../ModalSuccess';
 
 interface Neighborhoods {
   zone: number;
@@ -34,12 +35,14 @@ const PageMap: React.FC = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [initialPosition, setInitialPosition] = useState<[number, number]>([-7.1402162, -34.8881228]); //Coordenadas de João Pessoa
   const [neighborhoods, setNeighborhoods] = useState<Neighborhood[]>([]);
-  const [zoneSelected, setZoneSelected] = useState(0);
-  const [isShowContent, setIsShowContent] = useState(true);
-  const [isZoom, setIsZoom] = useState(false);
-  const [showModalMessage, setShowModalMessage] = useState(false);
-  const [neighborhoodSelected, setNeighborhoodSelected] = useState('');
-  const [showModalLogin, setShowModalLogin] = useState(false);
+  const [zoneSelected, setZoneSelected] = useState<number>(0);
+  const [isShowContent, setIsShowContent] = useState<boolean>(true);
+  const [isZoom, setIsZoom] = useState<boolean>(false);
+  const [showModalMessage, setShowModalMessage] = useState<boolean>(false);
+  const [neighborhoodSelected, setNeighborhoodSelected] = useState<string>('');
+  const [showModalLogin, setShowModalLogin] = useState<boolean>(false);
+  const [showModalSuccess, setShowModalSuccess] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>('');
 
   //setar array de bairros de acordo com a zona selecionada
   const searchZone = () => {
@@ -91,10 +94,10 @@ const PageMap: React.FC = () => {
                       style={{ paddingRight: 0 }}
                     >
                       <OverlayTrigger
-                        trigger="hover"
+                        trigger={"hover"}
                         placement="right-start"
                         overlay={
-                          <Popover id="popover-basic">
+                          <Popover id="popover-basic"  >
                             {
                               item.neighborhood.map((text: Neighborhood) => (
                                 <Popover.Content key={text.id} >
@@ -173,7 +176,7 @@ const PageMap: React.FC = () => {
           />
           {
             neighborhoods.map((mark: Neighborhood) => (
-              <Marker position={mark.location} title={mark.name} key={mark.id} />
+              <Marker position={mark.location} key={mark.id} />
             ))
           }
         </Map>
@@ -183,12 +186,19 @@ const PageMap: React.FC = () => {
         show={showModalMessage}
         onHide={() => setShowModalMessage(false)}
         neighborhood={neighborhoodSelected}
-        openLogin={() => { setShowModalLogin(true); setShowModalMessage(false) }}
+        openLogin={() => setShowModalLogin(true)}
+        sendMessage={(msg: string) => { setMessage(msg); setShowModalSuccess(true) }}
       />
       {/* Modal para logar */}
       <ModalLogin
         show={showModalLogin}
         onHide={() => setShowModalLogin(false)}
+      />
+      {/* Modal de feedback ao enviar mensagem */}
+      <ModalSuccess
+        show={showModalSuccess}
+        onHide={() => setShowModalSuccess(false)}
+        message={message}
       />
 
     </div>
