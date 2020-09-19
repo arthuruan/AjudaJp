@@ -36,6 +36,7 @@ const ModalSendMessage = ({ show, onHide, neighborhood, openLogin, sendMessage }
     if (message !== '') {
       props.onHide();
       sendMessage(message);
+      setMessage('');
     }
   }
 

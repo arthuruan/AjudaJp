@@ -16,10 +16,11 @@ const Apresentation: React.FC = () => {
       <div className="container-right" >
         <div className="info" >
           <h3>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia aperiam saepe commodi fuga.
+            Faça o papel de cidadão de uma maneira diferente aqui no AjudaJP.
           </h3>
           <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Error consequuntur officiis ipsa a odio, in voluptate eligendi, enim molestiae quibusdam consectetur aspernatur! Quis magnam beatae ea delectus enim dolorem facilis.
+            De um jeito fácil e rápido você poderá ajudar a melhorar os bairros de João Pessoa, ajude sua cidade agora
+            escolhendo uma zona e bairro, comentando o que precisa para melhora-lo.
           </p>
 
           <button className="primary-button" onClick={scrollToNextPage} >
