@@ -76,7 +76,7 @@ const PageMap: React.FC = () => {
             className="form-search"
           >
             <FormControl variant="outlined" size="small" style={{ width: '100%' }} >
-              <Select
+              <Select // foi usado o select do material-ui para ser possivel o uso do popover
                 labelId="demo-simple-select-outlined-label"
                 id="demo-simple-select-outlined"
                 onChange={(e: any) => setZoneSelected(Number(e.target.value))}
@@ -93,7 +93,7 @@ const PageMap: React.FC = () => {
                       value={item.zone}
                       style={{ paddingRight: 0 }}
                     >
-                      <OverlayTrigger
+                      <OverlayTrigger //caixa que possui todos os bairros de cada zona
                         trigger={"hover"}
                         placement="right-start"
                         overlay={

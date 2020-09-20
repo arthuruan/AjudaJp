@@ -25,18 +25,22 @@ const ModalLogin = ({ show, onHide }: MyProps) => {
 
   const signIn = () => {
 
-    const user = {
-      id: '123456',
-      token: 'token_valido',
-      email: userName,
-      name: userName
+    if (userName !== '' && password !== '') {
+      //formatando dados do login de usuario
+      const user = {
+        id: '123456',
+        token: 'token_valido',
+        email: userName,
+        name: userName
+      }
+
+      localStorage.setItem(environment.REACT_APP_LOCAL_STORAGE_USER, 'token_valido'); // setar token no localStorage
+      localStorage.setItem("userLogin", JSON.stringify({ user })); // setar dados de usuario no localStorage
+      dispatch(updateUser({ user })); // mandando informações do usuário para o redux
+
+      props.onHide();
     }
 
-    localStorage.setItem(environment.REACT_APP_LOCAL_STORAGE_USER, 'token_valido');
-    localStorage.setItem("userLogin", JSON.stringify({ user }));
-    dispatch(updateUser({ user }));
-
-    props.onHide();
   }
 
   return (

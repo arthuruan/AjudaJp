@@ -48,6 +48,7 @@ const ModalSendMessage = ({ show, onHide, neighborhood, openLogin, sendMessage }
     >
       {user.token !== '' ?
         <>
+          {/* modal se o usuario estiver logado */}
           <Modal.Header closeButton>
             <h5>
               Comente sobre o bairro <span>{neighborhood}</span>
@@ -86,6 +87,7 @@ const ModalSendMessage = ({ show, onHide, neighborhood, openLogin, sendMessage }
         </>
         :
         <div className="container-noLogged" >
+          {/* modal se o usuário não estiver logado */}
           <Modal.Header closeButton />
           <div className="content-img" >
             <img src={noLogged} alt="noLoggedUser" />
